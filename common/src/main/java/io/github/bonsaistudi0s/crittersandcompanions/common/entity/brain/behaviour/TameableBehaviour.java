@@ -16,19 +16,20 @@ public record TameableBehaviour(TamableAnimal owner, AnimalTags tags) implements
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        if(owner.isSleeping()) return InteractionResult.PASS;
-
         var stack = player.getItemInHand(hand);
 
-        if (owner.isTame()) {
-            if (owner.isOwnedBy(player)) {
-                var feedResult = heal(player, stack);
-                if (feedResult != InteractionResult.PASS) return feedResult;
-
-                return order(stack);
-            }
-        } else {
+        // taming is allowed while asleep, otherwise animals that sleep at night (red pandas) can't be tamed then
+        if (!owner.isTame()) {
             return tame(player, stack);
+        }
+
+        if (owner.isSleeping()) return InteractionResult.PASS;
+
+        if (owner.isOwnedBy(player)) {
+            var feedResult = heal(player, stack);
+            if (feedResult != InteractionResult.PASS) return feedResult;
+
+            return order(stack);
         }
 
         return InteractionResult.PASS;

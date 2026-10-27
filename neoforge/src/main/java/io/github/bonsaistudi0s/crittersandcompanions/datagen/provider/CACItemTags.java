@@ -38,6 +38,9 @@ public final class CACItemTags extends ItemTagsProvider {
         tag(ItemTags.CAT_FOOD).add(key(CACItems.KOI_FISH.get()));
         tag(ItemTags.OCELOT_FOOD).add(key(CACItems.KOI_FISH.get()));
         tag(ItemTags.FISHES).add(key(CACItems.KOI_FISH.get()));
+        tag(Tags.Items.FOODS_RAW_FISH).add(key(CACItems.KOI_FISH.get()));
+
+        tag(ItemTags.PIGLIN_LOVED).add(key(CACItems.GOLD_DRAGONFLY_ARMOR.get()));
 
         tag(DragonflyEntity.TAGS.food()).add(key(Items.SPIDER_EYE));
         temptWithFood(DragonflyEntity.TAGS);

@@ -50,8 +50,9 @@ public class GrapplingHookEntity extends ThrowableItemProjectile {
             addedToWorld = true;
         }
 
+        // owner can die, log out or change dimension while the hook is out
         var owner = getOwner();
-        if (owner == null) {
+        if (owner == null || !owner.isAlive() || owner.level() != level()) {
             discard();
             return;
         }
@@ -112,6 +113,16 @@ public class GrapplingHookEntity extends ThrowableItemProjectile {
     }
 
     @Override
+    public boolean canUsePortal(boolean allowPassengers) {
+        return false;
+    }
+
+    @Override
+    public boolean canTeleport(Level fromLevel, Level toLevel) {
+        return false;
+    }
+
+    @Override
     public boolean shouldRenderAtSqrDistance(double distance) {
         return distance < 4096.0D;
     }
@@ -126,6 +137,10 @@ public class GrapplingHookEntity extends ThrowableItemProjectile {
     }
 
     public void pull() {
+        if (isRemoved()) {
+            return;
+        }
+
         if (getOwner() != null) {
             if (isStick) {
                 var pullSpeed = CACCommonConfig.HANDLER.instance().grapplingHook.launchSpeed / 4;

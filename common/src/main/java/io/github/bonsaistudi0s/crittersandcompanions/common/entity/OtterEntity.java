@@ -245,8 +245,9 @@ public class OtterEntity extends Animal implements GeoEntity {
                 CACSounds.OTTER_CLAM_BREAK.get()
                 : CACSounds.OTTER_EAT.get();
         playSound(sound, 1.2F, 1.0F);
+        // eatOrOpen shrinks the held stack in place, so hand over a new stack to make sure the change is synced
         var result = eatOrOpen(level, held);
-        setItemInHand(InteractionHand.MAIN_HAND, result);
+        setItemInHand(InteractionHand.MAIN_HAND, result.isEmpty() ? ItemStack.EMPTY : result.copy());
         setEating(false);
     }
 
@@ -345,12 +346,31 @@ public class OtterEntity extends Animal implements GeoEntity {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
         ItemStack handStack = player.getItemInHand(interactionHand);
-        if (!this.isEating() && this.isFood(handStack)) {
-            this.setItemInHand(InteractionHand.MAIN_HAND, handStack.split(1));
-            handStack.shrink(1);
-            return super.mobInteract(player, interactionHand);
+        if (!this.isFood(handStack)) {
+            return InteractionResult.PASS;
         }
-        return InteractionResult.PASS;
+        if (this.isEating() || !this.getMainHandItem().isEmpty()) {
+            return InteractionResult.CONSUME;
+        }
+
+        // only take a single item, and only when it will actually be used
+        boolean isClam = handStack.is(CACItems.CLAM.get());
+        boolean canFallInLove = !this.isBaby() && this.getAge() == 0 && this.canFallInLove();
+        if (!isClam && !canFallInLove && !this.isBaby()) {
+            return InteractionResult.CONSUME;
+        }
+
+        if (!this.level().isClientSide()) {
+            this.setItemInHand(InteractionHand.MAIN_HAND, handStack.copyWithCount(1));
+            this.usePlayerItem(player, interactionHand, handStack);
+            if (canFallInLove) {
+                this.setInLove(player);
+            }
+            if (this.isBaby()) {
+                this.ageUp(getSpeedUpSecondsWhenFeeding(-this.getAge()), true);
+            }
+        }
+        return InteractionResult.SUCCESS;
     }
 
     @Override

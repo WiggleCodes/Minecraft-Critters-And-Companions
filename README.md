@@ -33,3 +33,22 @@ My girlfriend really wanted to play this mod, so I updated it to work with the c
 - Updated entity rendering for the 26.3 render state system and removed mixins that no longer apply
 - Updated loot table changes for 26.3 on both loaders (NeoForge global loot modifiers, Fabric loot table events)
 - Removed Trinkets support on Fabric, as Trinkets has no release for 26.3 (Curios is still supported on NeoForge)
+
+### Bug Fixes
+
+Fixes for issues and pull requests reported on the original repository:
+
+- Fixed grappling hook crashes when the player dies, disconnects, changes dimension or is teleported while the hook is out, and stopped hooks from travelling through portals (#61, #68, #70, #133, #153, #154, #156, #161, #163)
+- Fixed a client crash when a grappling hook update arrives for an unknown entity, such as with Replay Mod or Neruina (#81, #148)
+- Fixed otters eating 2–3 food items at once when fed by hand (#191)
+- Fixed otters still appearing to hold food after eating it when mods like Lithium are installed (#139)
+- Fixed red pandas not being tameable at night while they're asleep (#157)
+- Koi fish and clams can no longer be fished up in the Nether or the End (#147)
+- Koi fish are now tagged as `c:foods/raw_fish` for compatibility with cooking mods like Farmer's Delight (#134)
+- Gold dragonfly armor is now loved by piglins (#128)
+
+### Translations
+
+- Completed the Simplified Chinese translation (#187, thanks to flowersauce)
+- Corrected the Russian spelling of "ferret" (#131, thanks to FO13E)
+- Added Brazilian Portuguese (#47, thanks to gohkenytp) and Danish (#48, thanks to smifflepuss) translations

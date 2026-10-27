@@ -25,9 +25,7 @@ public class ClientPayloadHandler {
                 return;
             }
 
-            var player = (Player) level.getEntity(packet.playerId());
-
-            if (player instanceof IBubbleState bubbleState) {
+            if (level.getEntity(packet.playerId()) instanceof Player player && player instanceof IBubbleState bubbleState) {
                 bubbleState.setBubbleActive(packet.state());
                 if (packet.state() && packet.octopusId().isPresent()) {
                     var octopus = level.getEntity(packet.octopusId().getAsInt());
@@ -53,17 +51,13 @@ public class ClientPayloadHandler {
                 return;
             }
 
-            var player = (Player) level.getEntity(packet.playerId());
-
-            if (!(player instanceof IGrapplingState grappleState)) {
+            if (!(level.getEntity(packet.playerId()) instanceof IGrapplingState grappleState)) {
                 return;
             }
 
             packet.hook().ifPresentOrElse(
-                    id -> {
-                        var entity = (GrapplingHookEntity) level.getEntity(id);
-                        grappleState.setHook(entity);
-                    }, () -> grappleState.setHook(null)
+                    id -> grappleState.setHook(level.getEntity(id) instanceof GrapplingHookEntity hook ? hook : null),
+                    () -> grappleState.setHook(null)
             );
         });
     }

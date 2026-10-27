@@ -4,6 +4,7 @@
     "type": "minecraft:all_of",
     "terms": [
       { "type": "neoforge:loot_table_id", "loot_table_id": "minecraft:gameplay/fishing" },
+      { "type": "minecraft:location_check", "predicate": { "dimension": "minecraft:overworld" } },
       { "type": "minecraft:random_chance", "chance": 0.15 }
     ]
   },

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.loot.v3.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.mixin.loot.LootTableAccessor;
 import net.minecraft.advancements.predicates.ItemPredicate;
+import net.minecraft.advancements.predicates.LocationPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -12,12 +13,15 @@ import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ConstantValue;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -33,12 +37,14 @@ public class CACLootModifiers {
     public static void register() {
         // should always reflect the values in crittersandcompanions/loot_modifiers/..
 
-        addEntriesTo(BuiltInLootTables.FISHING_FISH, 0, builder -> {
+        // koi and clams are overworld water creatures, so they shouldn't be fished up in the nether or end
+        var inOverworld = LocationCheck.checkLocation(LocationPredicate.Builder.inDimension(Level.OVERWORLD));
+        addEntriesTo(BuiltInLootTables.FISHING_FISH, 0, inOverworld, builder -> {
             builder.accept(5, CACItems.CLAM.get());
             builder.accept(5, CACItems.KOI_FISH.get());
         });
 
-        EntityTypes.DROWNED.getDefaultLootTable().ifPresent(drownedLootTable -> addEntriesTo(drownedLootTable, 0, builder -> {
+        EntityTypes.DROWNED.getDefaultLootTable().ifPresent(drownedLootTable -> addEntriesTo(drownedLootTable, 0, null, builder -> {
             builder.accept(1, CACItems.CLAM.get());
         }));
 
@@ -88,7 +94,7 @@ public class CACLootModifiers {
         });
     }
 
-    private static void addEntriesTo(ResourceKey<LootTable> key, int index,
+    private static void addEntriesTo(ResourceKey<LootTable> key, int index, @Nullable LootItemCondition.Builder condition,
                                      Consumer<BiConsumer<Integer, Item>> entries) {
         LootTableEvents.REPLACE.register(((id, table, source, lookupProvider) -> {
             if (!id.equals(key)) return null;
@@ -100,7 +106,13 @@ public class CACLootModifiers {
             for (int i = 0; i < pools.size(); i++) {
                 var pool = FabricLootPoolBuilder.copyOf(pools.get(i));
                 if (i == index) {
-                    entries.accept((weight, item) -> pool.add(LootItem.lootTableItem(item).setWeight(weight)));
+                    entries.accept((weight, item) -> {
+                        var entry = LootItem.lootTableItem(item).setWeight(weight);
+                        if (condition != null) {
+                            entry.when(condition);
+                        }
+                        pool.add(entry);
+                    });
                 }
                 builder.withPool(pool);
             }
