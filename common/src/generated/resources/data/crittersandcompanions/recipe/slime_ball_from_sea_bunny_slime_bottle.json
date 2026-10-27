@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "crittersandcompanions:sea_bunny_slime_bottle"
+  ],
+  "result": {
+    "id": "minecraft:slime_ball"
+  }
+}

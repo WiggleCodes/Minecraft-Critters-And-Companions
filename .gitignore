@@ -1,0 +1,38 @@
+# Gradle
+.gradle/
+build/
+out/
+classes/
+
+# Dev run directories (logs, worlds, usernames, local configs)
+run/
+runs/
+
+# Node
+node_modules/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+bin/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs / misc
+*.log
+*.log.gz
+.architectury-transformer/
+
+# Local secrets
+.env
+.env.*
+local.properties

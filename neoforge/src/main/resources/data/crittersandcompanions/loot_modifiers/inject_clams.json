@@ -1,0 +1,21 @@
+{
+  "type": "crittersandcompanions:add_item",
+  "condition": {
+    "type": "minecraft:all_of",
+    "terms": [
+      {
+        "type": "minecraft:any_of",
+        "terms": [
+          { "type": "neoforge:loot_table_id", "loot_table_id": "minecraft:chests/shipwreck_treasure" },
+          { "type": "neoforge:loot_table_id", "loot_table_id": "minecraft:chests/underwater_ruin_small" },
+          { "type": "neoforge:loot_table_id", "loot_table_id": "minecraft:chests/underwater_ruin_big" }
+        ]
+      },
+      { "type": "minecraft:random_chance", "chance": 0.1 }
+    ]
+  },
+  "item": {
+    "id": "crittersandcompanions:clam",
+    "count": 1
+  }
+}

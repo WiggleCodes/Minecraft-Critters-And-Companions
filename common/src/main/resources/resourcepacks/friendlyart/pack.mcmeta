@@ -1,0 +1,7 @@
+{
+    "pack": {
+        "description": "An arachnophobia-friendly design for the Jumping Spider",
+        "min_format": 97,
+        "max_format": [97, 1]
+    }
+}

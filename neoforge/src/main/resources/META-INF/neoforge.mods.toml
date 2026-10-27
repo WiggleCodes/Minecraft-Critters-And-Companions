@@ -1,0 +1,58 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+issueTrackerURL = "https://github.com/bonsaistudi0s/CrittersAndCompanions/issues"
+license = "ARR"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${version}"
+displayName = "${mod_name}"
+authors = "WigglyWooOfficials (26.3 port), Joosh, EterDelta"
+description = "${description}"
+iconFile = "logo.png"
+
+[[dependencies.${mod_id}]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26.3,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_version}]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "architectury"
+type = "required"
+versionRange = "[${architectury_api_version},)"
+ordering = "AFTER"
+side = "BOTH"
+[dependencies.${mod_id}.mc-publish]
+    ignore = false
+    modrinth = "architectury-api"
+    curseforge = "architectury-api"
+
+[[dependencies.${mod_id}]]
+modId = "geckolib"
+type = "required"
+versionRange = "[${geckolib_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${mod_id}]]
+modId = "yet_another_config_lib_v3"
+type = "required"
+versionRange = "[${yacl_version},)"
+ordering = "NONE"
+side = "CLIENT"
+[dependencies.${mod_id}.mc-publish]
+    ignore = false
+    modrinth = "yacl"
+    curseforge = "yacl"
+
+[[mixins]]
+config = "${mod_id}.mixins.json"

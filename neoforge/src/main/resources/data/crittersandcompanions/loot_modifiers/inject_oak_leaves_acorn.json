@@ -1,0 +1,18 @@
+{
+  "type": "crittersandcompanions:add_item",
+  "condition": {
+    "type": "minecraft:all_of",
+    "terms": [
+      { "type": "neoforge:loot_table_id", "loot_table_id": "minecraft:blocks/oak_leaves" },
+      {
+        "type": "minecraft:table_bonus",
+        "enchantment": "minecraft:fortune",
+        "chances": [0.05, 0.0625, 0.083333336, 0.1]
+      }
+    ]
+  },
+  "item": {
+    "id": "crittersandcompanions:acorn",
+    "count": 1
+  }
+}

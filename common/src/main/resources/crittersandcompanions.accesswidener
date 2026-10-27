@@ -1,0 +1,7 @@
+accessWidener v2 official
+
+accessible class net/minecraft/server/level/ChunkMap$TrackedEntity
+accessible field net/minecraft/server/level/ChunkMap entityMap Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+accessible field net/minecraft/server/level/ChunkMap$TrackedEntity seenBy Ljava/util/Set;
+
+accessible field net/minecraft/world/entity/ai/goal/AvoidEntityGoal avoidEntityTargeting Lnet/minecraft/world/entity/ai/targeting/TargetingConditions;

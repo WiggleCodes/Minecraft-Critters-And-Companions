@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": "#c:gems/diamond"
+  },
+  "pattern": [
+    "  D",
+    " D ",
+    "D  "
+  ],
+  "result": {
+    "id": "crittersandcompanions:diamond_dragonfly_armor"
+  }
+}

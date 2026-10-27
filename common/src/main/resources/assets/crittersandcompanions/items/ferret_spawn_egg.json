@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "crittersandcompanions:item/template_spawn_egg",
+    "tints": [
+      { "type": "minecraft:constant", "value": 12954760 },
+      { "type": "minecraft:constant", "value": 3612973 }
+    ]
+  }
+}

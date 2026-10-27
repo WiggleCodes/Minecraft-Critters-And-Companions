@@ -1,0 +1,36 @@
+{
+  "required": true,
+  "package": "io.github.bonsaistudi0s.crittersandcompanions.common.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "minVersion": "0.8",
+  "client": [
+    "ClientPacketListenerMixin",
+    "EntityRendererMixin",
+    "EntityRenderStateMixin"
+  ],
+  "mixins": [
+    "AbstractIllagerMixin",
+    "ChestBlockMixin",
+    "DrownedMixin",
+    "EndermiteMixin",
+    "FrogMixin",
+    "LivingEntityMixin",
+    "MobMixin",
+    "NearestAttackableTargetGoalMixin",
+    "NeutralMobsMixin",
+    "PlayerMixin",
+    "SilverfishMixin",
+    "WallClimberNavigationAccessor",
+    "ZombieMixin",
+    "ZombifiedPiglinMixin",
+    "behaviour.AgeableMobMixin",
+    "behaviour.AnimalMixin",
+    "behaviour.BucketableMixin",
+    "behaviour.EntityMixin",
+    "behaviour.LivingEntityMixin",
+    "behaviour.MobMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

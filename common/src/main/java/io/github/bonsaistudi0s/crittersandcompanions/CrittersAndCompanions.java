@@ -1,0 +1,117 @@
+package io.github.bonsaistudi0s.crittersandcompanions;
+
+import dev.architectury.event.EventResult;
+import dev.architectury.event.events.common.EntityEvent;
+import dev.architectury.event.events.common.InteractionEvent;
+import dev.architectury.event.events.common.LifecycleEvent;
+import dev.architectury.event.events.common.TickEvent;
+import dev.architectury.platform.Platform;
+import dev.architectury.registry.CreativeTabRegistry;
+import dev.architectury.registry.registries.DeferredRegister;
+import dev.architectury.registry.registries.RegistrySupplier;
+import io.github.bonsaistudi0s.crittersandcompanions.common.api.CACColors;
+import io.github.bonsaistudi0s.crittersandcompanions.common.config.CACCommonConfig;
+import io.github.bonsaistudi0s.crittersandcompanions.common.handler.LushCaveSpawnHandler;
+import io.github.bonsaistudi0s.crittersandcompanions.common.handler.PlayerHandler;
+import io.github.bonsaistudi0s.crittersandcompanions.common.network.CACPacketHandler;
+import io.github.bonsaistudi0s.crittersandcompanions.common.registry.*;
+import io.github.bonsaistudi0s.crittersandcompanions.common.world.CACWorldGen;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.context.UseOnContext;
+
+public class CrittersAndCompanions {
+
+    public static final String MODID = "crittersandcompanions";
+
+    public static Identifier createId(String path) {
+        return Identifier.fromNamespaceAndPath(MODID, path);
+    }
+
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(MODID, Registries.CREATIVE_MODE_TAB);
+
+    public static final RegistrySupplier<CreativeModeTab> CREATIVE_TAB = CREATIVE_TABS.register("main", () ->
+            CreativeTabRegistry.create(
+                    Component.translatable("itemGroup." + MODID),
+                    () -> CACItems.PEARL_NECKLACE_1.get().getDefaultInstance()
+            )
+    );
+
+    public static void init() {
+        CREATIVE_TABS.register();
+
+        CACBlocks.init();
+        CACEntities.init();
+        CACItems.init();
+        CACMenuTypes.init();
+        CACPotions.init();
+        CACSounds.init();
+        CACPacketHandler.registerPackets();
+
+        registerColors();
+
+        LifecycleEvent.SETUP.register(() -> {
+            CACEntities.setup();
+            CACWorldGen.register();
+        });
+
+        CACCommonConfig.loadAndMigrate();
+
+        registerEvents();
+    }
+
+    private static void registerColors() {
+        CACColors.register(DyeColor.WHITE);
+        CACColors.register(DyeColor.ORANGE);
+        CACColors.register(DyeColor.MAGENTA);
+        CACColors.register(DyeColor.LIGHT_BLUE);
+        CACColors.register(DyeColor.YELLOW);
+        CACColors.register(DyeColor.LIME);
+        CACColors.register(DyeColor.PINK);
+        CACColors.register(DyeColor.GRAY);
+        CACColors.register(DyeColor.LIGHT_GRAY);
+        CACColors.register(DyeColor.CYAN);
+        CACColors.register(DyeColor.PURPLE);
+        CACColors.register(DyeColor.BLUE);
+        CACColors.register(DyeColor.BROWN);
+        CACColors.register(DyeColor.GREEN);
+        CACColors.register(DyeColor.RED);
+        CACColors.register(DyeColor.BLACK);
+    }
+
+    private static void registerEvents() {
+        TickEvent.PLAYER_POST.register(PlayerHandler::onPlayerTick);
+        TickEvent.SERVER_POST.register(LushCaveSpawnHandler::tick);
+
+        EntityEvent.LIVING_CHECK_SPAWN.register((entity, world, x, y, z, type, spawner) -> {
+            if (CACCommonConfig.HANDLER.instance().spawning.preventMonsterSpawnsInLushCaves && entity instanceof Monster && type == EntitySpawnReason.NATURAL) {
+                if (world.getBiome(BlockPos.containing(x, y, z)).is(CACTags.IS_LUSH)) {
+                    // Bug in Architectury 13.0.11
+                    // TODO: check if this is an issue when porting to 1.20.1
+                    return Platform.isFabric() ? EventResult.interruptFalse() : EventResult.interruptTrue();
+                }
+            }
+
+            return EventResult.pass();
+        });
+
+        InteractionEvent.INTERACT_ENTITY.register((player, entity, hand) -> {
+            if (player.level().isClientSide()) {
+                return EventResult.pass();
+            }
+
+            var result = PlayerHandler.onPlayerEntityInteract(entity, new UseOnContext(player, hand, null));
+            if (result != null) {
+                return EventResult.interruptFalse();
+            }
+
+            return EventResult.pass();
+        });
+    }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "crittersandcompanions:replace_item",
+  "condition": {
+    "type": "minecraft:all_of",
+    "terms": [
+      { "type": "neoforge:loot_table_id", "loot_table_id": "minecraft:entities/drowned" },
+      { "type": "minecraft:random_chance", "chance": 0.5 }
+    ]
+  },
+  "items": [
+    { "weight": 1, "data": { "id": "crittersandcompanions:clam", "count": 1 } }
+  ]
+}

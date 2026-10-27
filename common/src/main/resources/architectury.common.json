@@ -1,0 +1,10 @@
+{
+  "injected_interfaces": {
+    "net/minecraft/world/entity/AgeableMob": ["io/github/bonsaistudi0s/crittersandcompanions/common/entity/brain/behaviour/BehaviourDriven"],
+    "net/minecraft/world/entity/Entity": ["io/github/bonsaistudi0s/crittersandcompanions/common/entity/brain/behaviour/BehaviourDriven"],
+    "net/minecraft/world/entity/Mob": ["io/github/bonsaistudi0s/crittersandcompanions/common/entity/brain/behaviour/BehaviourDriven"],
+    "net/minecraft/world/entity/LivingEntity": ["io/github/bonsaistudi0s/crittersandcompanions/common/entity/brain/behaviour/BehaviourDriven"],
+    "net/minecraft/world/entity/animal/Animal": ["io/github/bonsaistudi0s/crittersandcompanions/common/entity/brain/behaviour/BehaviourDriven"],
+    "net/minecraft/client/renderer/entity/state/EntityRenderState": ["com/geckolib/renderer/base/GeoRenderState"]
+  }
+}

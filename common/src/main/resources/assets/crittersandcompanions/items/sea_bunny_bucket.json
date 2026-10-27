@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "entries": [
+      { "threshold": 1, "model": { "type": "minecraft:model", "model": "crittersandcompanions:item/sea_bunny_bucket_1" } },
+      { "threshold": 2, "model": { "type": "minecraft:model", "model": "crittersandcompanions:item/sea_bunny_bucket_2" } }
+    ],
+    "fallback": { "type": "minecraft:model", "model": "crittersandcompanions:item/sea_bunny_bucket" }
+  }
+}

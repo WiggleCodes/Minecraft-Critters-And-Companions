@@ -1,0 +1,14 @@
+{
+  "type": "crittersandcompanions:replace_item",
+  "condition": {
+    "type": "minecraft:all_of",
+    "terms": [
+      { "type": "neoforge:loot_table_id", "loot_table_id": "minecraft:gameplay/fishing" },
+      { "type": "minecraft:random_chance", "chance": 0.15 }
+    ]
+  },
+  "items": [
+    { "weight": 5, "data": { "id": "crittersandcompanions:koi_fish", "count": 1 } },
+    { "weight": 5, "data": { "id": "crittersandcompanions:clam", "count": 1 } }
+  ]
+}

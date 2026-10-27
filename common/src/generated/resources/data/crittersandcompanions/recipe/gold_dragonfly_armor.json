@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": "#c:ingots/gold"
+  },
+  "pattern": [
+    "  G",
+    " G ",
+    "G  "
+  ],
+  "result": {
+    "id": "crittersandcompanions:gold_dragonfly_armor"
+  }
+}

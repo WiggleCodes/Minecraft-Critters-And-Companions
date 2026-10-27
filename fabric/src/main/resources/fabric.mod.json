@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "${description}",
+  "authors": [
+    "WigglyWooOfficials (26.3 port)",
+    "Joosh",
+    "EterDelta"
+  ],
+  "contact": {
+    "sources": "https://github.com/bonsaistudi0s/CrittersAndCompanions",
+    "issues": "https://github.com/bonsaistudi0s/CrittersAndCompanions/issues"
+  },
+  "license": "ARR",
+  "icon": "logo.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.bonsaistudi0s.crittersandcompanions.fabric.CrittersAndCompanionsFabric"
+    ],
+    "client": [
+      "io.github.bonsaistudi0s.crittersandcompanions.fabric.client.CrittersAndCompanionsFabricClient"
+    ],
+    "modmenu": [
+      "io.github.bonsaistudi0s.crittersandcompanions.fabric.client.compat.ModMenuCompat"
+    ]
+  },
+  "mixins": [
+    "${mod_id}.mixins.json",
+    "${mod_id}.fabric.mixins.json"
+  ],
+  "accessWidener": "${mod_id}.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "=${minecraft_version}",
+    "java": ">=25",
+    "architectury": ">=${architectury_api_version}",
+    "fabric-api": "*",
+    "geckolib": ">=${geckolib_version}",
+    "yet_another_config_lib_v3": ">=${yacl_version}"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/bonsai-studios-675743114173874176"
+      }
+    },
+    "mc-publish": {
+      "dependencies": [
+        "architectury#(ignore)",
+        "architectury-api@>=${architectury_api_version}(required)",
+        "yet_another_config_lib_v3#(ignore)",
+        "yacl@>=${yacl_version}(required)"
+      ]
+    }
+  }
+}
