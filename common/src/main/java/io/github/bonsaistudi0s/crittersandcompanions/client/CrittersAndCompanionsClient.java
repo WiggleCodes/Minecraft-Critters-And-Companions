@@ -1,10 +1,7 @@
 package io.github.bonsaistudi0s.crittersandcompanions.client;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.network.chat.Component;
 
-import dev.architectury.event.events.client.ClientPlayerEvent;
 import dev.architectury.registry.client.gui.MenuScreenRegistry;
 import dev.architectury.registry.client.level.entity.EntityModelLayerRegistry;
 import dev.architectury.registry.client.level.entity.EntityRendererRegistry;
@@ -24,10 +21,6 @@ public class CrittersAndCompanionsClient {
     public static void init() {
         registerEntityRenderers();
         registerEntityLayers();
-
-        ClientPlayerEvent.CLIENT_PLAYER_JOIN.register(player -> player.sendSystemMessage(
-                Component.literal("Critters and Companions re-developed by WigglyWooOfficials").withStyle(ChatFormatting.GREEN)
-        ));
     }
 
     private static void registerEntityRenderers() {
