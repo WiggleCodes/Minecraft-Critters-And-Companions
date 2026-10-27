@@ -18,3 +18,9 @@
 ## About
 
 Critters and Companions is a vanilla-style creature mod that will fill the overworld with new animals!
+
+## About This Version
+
+This is an updated version of Critters and Companions, ported to Minecraft 26.3 for Fabric and NeoForge.
+
+My girlfriend really wanted to play this mod, so I updated it to work with the current mods she uses. She's very grateful to the original developers for creating it, and I'd like to say a personal thank you as well. All credit for the mod goes to Bonsai Studios and its original creators.
