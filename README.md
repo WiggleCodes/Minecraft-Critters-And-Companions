@@ -21,9 +21,14 @@ Critters and Companions is a vanilla-style creature mod that will fill the overw
 
 ## About This Version
 
-This is an updated version of Critters and Companions, ported to Minecraft 26.3 for Fabric and NeoForge.
+> [!NOTE]
+> **This is my own unofficial re-upload of Critters and Companions.** It's not an official release and isn't affiliated with or endorsed by Bonsai Studios.
 
-My girlfriend really wanted to play this mod, so I updated it to work with the current mods she uses. She's very grateful to the original developers for creating it, and I'd like to say a personal thank you as well. All credit for the mod goes to Bonsai Studios and its original creators.
+This version has the latest patches in place so it works with the **latest version of Minecraft (26.3)** on both Fabric and NeoForge.
+
+I only did this so my girlfriend could play this mod on an up-to-date version of Minecraft alongside the other mods she uses. She's very grateful to the original developers for creating it, and I'd like to say a personal thank you as well. All credit for the mod goes to Bonsai Studios and its original creators.
+
+If an official update for 26.3 is released, please use that instead and support the original developers through the links above.
 
 ## Changes in This Version
 
